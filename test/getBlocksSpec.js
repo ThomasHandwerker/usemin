@@ -61,6 +61,35 @@ describe('Get Blocks', function () {
 		expect(blocks).to.eql(outcome);
 	});
 
+	it('should get JS block contain complex output file description', function  () {
+		var src = inputsDir + 'js-complex.html';
+		var content = fs.readFileSync(src).toString();
+		var blocks = getBlocks(src, content);
+		var outcome = [
+			{
+				async: false,
+				defer: false,
+				type: 'js',
+				dest: 'js/main.js',
+				destAlias: '#staticURLWithVersion(\'js/main.js\')',
+				indent: '\t',
+				searchPath: ['',],
+				src: [
+					inputsDir + 'js/foo.js',
+					inputsDir + 'js/bar.js',
+				],
+				raw: [
+					'\t<!-- build:js #staticURLWithVersion(\'js/main.js\') -->',
+					'\t<script src="js/foo.js"></script>',
+					'\t<script src="js/bar.js"></script>',
+					'\t<!-- endbuild -->',
+				],
+			},
+		];
+
+		expect(blocks).to.eql(outcome);
+	});
+
 	it('should get CSS block', function () {
 		var src = inputsDir + 'css.html';
 		var content = fs.readFileSync(src).toString();
