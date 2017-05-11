@@ -31,4 +31,47 @@ describe('Usemin', function () {
 		expect(css).to.eql(cssExpected);
 		expect(js).to.eql(jsExpected);
 	});
+
+	it('should create sourcemap for file', function () {
+		var src = inputsDir + 'sourcemap.html';
+		var dest = inputsDir + 'dist';
+		var config = {
+			config: {
+				uglifyjs: {
+					outSourceMap: true,
+				},
+			},
+		};
+
+		var useminDir = inputsDir + '';
+		var smExpected = fs.readFileSync(useminDir + 'sourcemap/expected.js.map', 'utf8');
+
+		usemin(src, dest, config);
+
+		var sm = fs.readFileSync(inputsDir + 'dist/js/sourcemap-bundled.js.map', 'utf8');
+
+		expect(sm).to.eql(smExpected);
+	});
+
+	it('should create sourcemap for file and handle prefix config', function () {
+		var src = inputsDir + 'sourcemap.html';
+		var dest = inputsDir + 'dist';
+		var config = {
+			config: {
+				uglifyjs: {
+					outSourceMap: true,
+					prefix: 2,
+				},
+			},
+		};
+
+		var useminDir = inputsDir + '';
+		var smExpected = fs.readFileSync(useminDir + 'sourcemap/expected-prefix.js.map', 'utf8');
+
+		usemin(src, dest, config);
+
+		var sm = fs.readFileSync(inputsDir + 'dist/js/sourcemap-bundled.js.map', 'utf8');
+
+		expect(sm).to.eql(smExpected);
+	});
 });

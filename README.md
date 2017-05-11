@@ -222,6 +222,32 @@ module.exports = {
 }
 ```
 
+In order to create single `*.map` file for each block defined in html document, the `outSourceMap` options of `uglifyjs` is extended. It is now possible to pass only the boolean value `true` in order to generate the corresponding `*.map` file for the block.
+
+```html
+<!-- build:js(js) js/main.js -->
+<script defer async src="app.js"></script>
+<script defer async src="controllers.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(js) js/external.js -->
+<script defer async src="app.js"></script>
+<script defer async src="controllers.js"></script>
+<!-- endbuild -->
+```
+
+When setting uglifyjs config `outSourceMap` to `true`, then a `main.js.map` and `external.js.map` file will be generated.
+
+It is also possible to set a `prefix` numeric value in ordert to revise sources path generated in sourcemap files. More details on the `prefix` option is available in official [UglifyJS2 documentation](https://github.com/mishoo/UglifyJS2/tree/v2.x)
+
+```JavaScript
+module.exports = {
+	uglifyjs: {
+		outSourceMap: true,
+		prefix: 2,
+	}
+}
+```
 ## License
 
 [MIT license](http://opensource.org/licenses/MIT.php)
