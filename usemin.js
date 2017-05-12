@@ -17,6 +17,7 @@ function usemin(filepath, dest, userConfig) {
 		configFile: false,
 		config: false,
 		htmlmin: false,
+		nobundle: false,
 		noprocess: false,
 		removeLivereload: false,
 	};
@@ -24,8 +25,8 @@ function usemin(filepath, dest, userConfig) {
 	var content = fs.readFileSync(filepath).toString();
 	var blocks = getBlocks(filepath, content, config.removeLivereload);
 	var useminConfig = getConfig(config.configFile, config.config);
-	var process = config.noprocess ? true : processBlocks(blocks, dest, useminConfig);
-	var output = getHtml(content, blocks, config.htmlmin, useminConfig);
+	var process = (config.noprocess || config.nobundle) ? true : processBlocks(blocks, dest, useminConfig);
+	var output = getHtml(content, blocks, config.htmlmin, useminConfig, config.nobundle);
 
 	if (process) {
 		if (config.output) {

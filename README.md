@@ -38,6 +38,7 @@ var defaults = {
 	config: false, // UglifyJS, CleanCSS and HTML minifier configs,
 	               // similar format to the config file (object)
 	htmlmin: false, // Whether to minify the input HTML file (Boolean)
+	nobundle: false, // Whether to bundle block source files (Boolean)
 	noprocess: false, // Do not process files, just replace references (Boolean)
 	removeLivereload: false, // Remove livereload script (Boolean)
 };
@@ -131,8 +132,8 @@ Uglify javascripts and CSS for a supplied block object from the `usemin.getBlock
 #### Returns:
 *(boolean)* Throws error, otherwise true.
 
-### usemin.getHtml(content, blocks, htmlmin, config)
-Returns the HTML with replaced references to non-optimized scripts or stylesheets.
+### usemin.getHtml(content, blocks, htmlmin, config, nobundle)
+Returns the HTML with replaced references to non-optimized scripts or stylesheets. Last parameter ensure, if block source files shall be bundled or not.
 
 #### Parameters:
 *(string)* **content** - Content of the HTML file as a string. (The reason for this is because the

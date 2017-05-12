@@ -27,4 +27,14 @@ describe('Get HTML', function () {
 
 		expect(html + '\n').to.equal(outcome);
 	});
+
+	it('should get no bundled HTML correctly', function () {
+		var src = inputsDir + 'index.html';
+		var content = fs.readFileSync(src).toString();
+		var outcome = fs.readFileSync(inputsDir + 'htmlnobundle.html').toString();
+		var blocks = getBlocks(src, content, true);
+		var html = getHtml(content, blocks, false, config, true);
+
+		expect(html).to.be.equal(outcome);
+	});
 });
