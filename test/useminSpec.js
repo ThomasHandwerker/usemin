@@ -74,4 +74,19 @@ describe('Usemin', function () {
 
 		expect(sm).to.eql(smExpected);
 	});
+
+	it('should append hash suffix on javascript files', function () {
+		var src = inputsDir + 'usemin/index.html';
+		var dest = inputsDir + 'dist';
+		var config = {
+			hash: true,
+			removeLivereload: false,
+		};
+		var useminDir = inputsDir + 'usemin/';
+		var htmlExpected = fs.readFileSync(useminDir + 'expected-hash.html', 'utf8');
+
+		var html = usemin(src, dest, config);
+
+		expect(html).to.eql(htmlExpected);
+	});
 });

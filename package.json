@@ -25,6 +25,7 @@
   "dependencies": {
     "clean-css": "^3.4.24",
     "html-minifier": "^3.2.3",
+    "md5-file": "^3.1.1",
     "mkdirp": "^0.5.1",
     "uglify-js": "^2.7.5"
   },

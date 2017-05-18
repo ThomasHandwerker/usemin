@@ -37,6 +37,7 @@ var defaults = {
 	configFile: false, // config file path for UglifyJS, CleanCSS and HTML minifier (string)
 	config: false, // UglifyJS, CleanCSS and HTML minifier configs,
 	               // similar format to the config file (object)
+	hash: false, // append md5-hash value of bundle as suffix (bundle.js?v={MD5})
 	htmlmin: false, // Whether to minify the input HTML file (Boolean)
 	nobundle: false, // Whether to bundle block source files (Boolean)
 	noprocess: false, // Do not process files, just replace references (Boolean)
@@ -132,8 +133,8 @@ Uglify javascripts and CSS for a supplied block object from the `usemin.getBlock
 #### Returns:
 *(boolean)* Throws error, otherwise true.
 
-### usemin.getHtml(content, blocks, htmlmin, config, nobundle)
-Returns the HTML with replaced references to non-optimized scripts or stylesheets. Last parameter ensure, if block source files shall be bundled or not.
+### usemin.getHtml(content, blocks, htmlmin, config, nobundle, hashing, dest)
+Returns the HTML with replaced references to non-optimized scripts or stylesheets. `nobundle` parameter ensure, if block source files shall be bundled. `hashing` allows to hash created bundle file with md5 and append hash-value to the `src=` script tag. The `dest` parameter is necessary for hashing in order to find location of created bundle files.
 
 #### Parameters:
 *(string)* **content** - Content of the HTML file as a string. (The reason for this is because the
@@ -145,6 +146,12 @@ times it's simply cached into a variable to be passed into these API functions.)
 *(boolean)* **htmlmin** - Whether to also minify the HTML.
 
 *(object)* **config** - Configuration object for UglifyJS, cleanCSS and HTML minifier.
+
+*(boolean)* **nobundle** - Whether to bundle javascript source files.
+
+*(boolean)* **hashing** - Whether to create md5 hash of created bundle files and append to script tag.
+
+*(string)* **dest** - Destination of usemin output. Is necessary in order to find created bundle files for hashing.
 
 #### Returns:
 *(string)* The content of the final HTML file
